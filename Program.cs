@@ -10,36 +10,41 @@ Utils.PrintLogo();
 Console.WriteLine("\n\n\nЗдравствуйте!");
 while (true) 
 {
-    StartFrame();
+    // ============ START FRAME ============
+    ConsoleMenu.StartFrame();
     try 
     {
         choiceStart = Convert.ToInt32(Console.ReadLine());
     }
-    catch
+    catch (Exception exception)
     {
-        IncorrectEnterFrame();
+        // ====== EXCEPTION FRAME ======
+        ConsoleMenu.IncorrectEnterFrame(exception);
+        // ====== \EXCEPTION FRAME ======
         continue;
     }
+    // ============ \START FRAME ============
 
+    // ================== MAIN MENU FRAME ==================
     if (choiceStart == 1)
     {
-        MainMenuFrame();
+        
+        ConsoleMenu.MainMenuFrame();
         var choice = Convert.ToInt32(Console.ReadLine());
 
         switch (choice)
         {
             case 1:
-                Console.Clear();
-                Utils.PrintLogo();
-                Console.WriteLine("\n\n\nВведите текст, который требуется найти:");
-                Console.Write(">>");
-                string textFind = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("\n\n\nВведите текст, которым вы замените найденный текст:");
-                Console.Write(">>");
-                string textReplace = Convert.ToString(Console.ReadLine());
+                // ================== FIND & REPLACE FRAME ==================
+                string textFind = ""; string textReplace = "";
+                ConsoleMenu.FindAndReplaceFrame(ref textFind, ref textReplace);
+
                 try
                 {
-                    _0xDocWorker._0xDocWorker.ReplaceText(pathWithFiles, textFind, textReplace);
+                    if (textFind != null && textReplace != null) 
+                    {
+                        _0xDocWorker._0xDocWorker.ReplaceText(pathWithFiles, textFind, textReplace);
+                    }
                 }
                 catch 
                 {
@@ -47,46 +52,25 @@ while (true)
                 }
 
                 break;
+                // ================== \FIND & REPLACE FRAME ==================
 
             case 2:
                 break;
 
             case 3:
+                // ======== EXIT FRAME ========
                 Utils.Exit(); 
                 break;
-                
+                // ======== \EXIT FRAME ========
+
         }
+
     }
-    else 
+    // ================== \MAIN MENU FRAME ==================
+    else
     {
-        IncorrectEnterFrame();
+        // ====== EXCEPTION FRAME ======
+        ConsoleMenu.IncorrectEnterFrame();
+        // ====== \EXCEPTION FRAME ======
     }
-}
-
-void StartFrame() 
-{
-    Console.WriteLine("Я создал папку docs в папке с этой программой, " +
-                      "пожалуйста, поместите туда нужные вам .doc файлы, " +
-                      "затем введите 1 в консоль:");
-
-    Console.Write(">>");
-};
-
-void MainMenuFrame() 
-{
-    Console.Clear();
-    Utils.PrintLogo();
-    Console.WriteLine("\n\n\nВыберите что вы хотите сделать:");
-    Console.WriteLine("1 - Найти и заменить текст во всех документах");
-    Console.WriteLine("2 - ");
-    Console.WriteLine("3 - Выход из программы");
-
-    Console.Write(">>");
-}
-
-void IncorrectEnterFrame() 
-{
-    Console.WriteLine("Вы ввели что-то другое... Попробуем еще раз.");
-    Console.WriteLine("Для продолжения нажмите любую клавишу.");
-    Console.ReadKey();
 }
