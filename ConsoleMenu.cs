@@ -40,5 +40,17 @@ namespace _0xDocWorker
             Console.WriteLine("Для продолжения нажмите любую клавишу.");
             Console.ReadKey();
         }
+
+        public static void FindAndReplaceFrame(ref string textFind, ref string textReplace) 
+        {
+            Console.Clear();
+            Utils.PrintLogo();
+            Console.WriteLine("\n\n\nВведите текст, который требуется найти:");
+            Console.Write(">>");
+            textFind = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("\n\n\nВведите текст, которым вы замените найденный текст:");
+            Console.Write(">>");
+            textReplace = Convert.ToString(Console.ReadLine());
+        }
     }
 }

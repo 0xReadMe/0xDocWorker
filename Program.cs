@@ -43,7 +43,13 @@ while (true)
                 {
                     if (textFind != null && textReplace != null) 
                     {
-                        _0xDocWorker._0xDocWorker.ReplaceText(pathWithFiles, textFind, textReplace);
+                        var a = Utils.FindAllFiles(pathWithFiles);
+                        a.ToList().ForEach(file => 
+                        { 
+                            _0xDocWorker._0xDocWorker.ReplaceText(file, textFind, textReplace);
+                            
+                            Console.WriteLine($"Успешно заменили текст в файле {file}");
+                        });
                     }
                 }
                 catch 
